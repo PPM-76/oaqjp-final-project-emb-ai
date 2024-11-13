@@ -15,13 +15,18 @@ def request_analyser():
     # Build response
     # get dominant emotion and remove it from the dictionary
     dominant_emotion = text_analysed.pop('dominant_emotion')
-    # iterate over the remainder of the dictionary to construct the emotion string.
-    emotion_str = ", ".join(f"'{key}' : {value}" for key, value in text_analysed.items())
-    # Build the response to provide to the user
-    response_to_user = (
-        f'For the given statement, the system response is {emotion_str}.' 
-        f' The dominant emotion is <b>{dominant_emotion}</b>.'
-        )
+
+    if dominant_emotion == None:
+        response_to_user = '<b>Invalid text! Please try again!.</b>'
+    
+    else:
+        # iterate over the remainder of the dictionary to construct the emotion string.
+        emotion_str = ", ".join(f"'{key}' : {value}" for key, value in text_analysed.items())
+        # Build the response to provide to the user
+        response_to_user = (
+            f'For the given statement, the system response is {emotion_str}.' 
+            f' The dominant emotion is <b>{dominant_emotion}</b>.'
+            )
 
     return response_to_user
 
