@@ -1,3 +1,6 @@
+'''
+server module
+'''
 from flask import Flask, request, render_template
 from EmotionDetection.emotion_detection import emotion_detector
 
@@ -16,9 +19,8 @@ def request_analyser():
     # get dominant emotion and remove it from the dictionary
     dominant_emotion = text_analysed.pop('dominant_emotion')
 
-    if dominant_emotion == None:
+    if dominant_emotion is None:
         response_to_user = '<b>Invalid text! Please try again!.</b>'
-    
     else:
         # iterate over the remainder of the dictionary to construct the emotion string.
         emotion_str = ", ".join(f"'{key}' : {value}" for key, value in text_analysed.items())
@@ -33,10 +35,9 @@ def request_analyser():
 @app.route('/')
 def render_page_index():
     ''' Start the rendering of the main application page in Flask.
-    ''' 
+    '''
     return render_template("index.html")
 
 if __name__ == "__main__":
-    app.run(host='localhost', port=5000)
-
+    app.run(host='localhost', port=4000)
     
